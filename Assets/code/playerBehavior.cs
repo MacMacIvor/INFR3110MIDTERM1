@@ -15,19 +15,27 @@ public class playerBehavior : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += Vector3.forward * Time.deltaTime;
+            transform.position += Vector3.forward * Time.deltaTime * 5.0f;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            transform.position += Vector3.back * Time.deltaTime;
+            transform.position += Vector3.back * Time.deltaTime * 5.0f;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position += Vector3.left * Time.deltaTime;
+            transform.position += Vector3.left * Time.deltaTime * 5.0f;
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            transform.position += Vector3.right * Time.deltaTime;
+            transform.position += Vector3.right * Time.deltaTime * 5.0f;
         }
+
+        Physics.gravity = new Vector3(0, Physics.gravity.y, 0);
+    }
+
+    public void respawnThePlayer()
+    {
+        //getCheckpointandcheckpointLocation
+        transform.position = new Vector3(0, 10, 0);
     }
 }
