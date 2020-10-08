@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class playerBehavior : MonoBehaviour
 {
+    private int currentCheckPoint = 0;
+    private Vector3 currentRespawnLocation = new Vector3(0, 10, 0);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +39,13 @@ public class playerBehavior : MonoBehaviour
     public void respawnThePlayer()
     {
         //getCheckpointandcheckpointLocation
-        transform.position = new Vector3(0, 10, 0);
+        transform.position = currentRespawnLocation;
+    }
+
+    public void updateRespawn(Vector3 newRespawnPoint)
+    {
+        currentRespawnLocation = newRespawnPoint;
+        currentRespawnLocation.y += 10;
+        currentCheckPoint++;
     }
 }
