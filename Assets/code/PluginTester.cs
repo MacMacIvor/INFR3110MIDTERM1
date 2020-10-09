@@ -17,14 +17,22 @@ public class PluginTester : MonoBehaviour
         public float timeCheckPoint3;
         public float timeCheckPoint4;
         public float timeCheckPoint5;
-        public float totalTime;
         public float timesDied;
+        public float totalTime;
     }
 
-    playerScoreUnity test;
+    //Order things need to happen
+    //set the filepath
+    //Load Values (this loads the records in the file)
+    //Start timer at start of gameplay
+    //eachCheckpoint calls saveCheckPoint
+    //The end screen calls the getInfo for the information
+    //SetScore is a trap, don't use it, it's here for debug purposes
+
+
+    //playerScoreUnity test;
 
     [DllImport(DLL_NAME)]
-
     private static extern playerScoreUnity getInfo(int number);
 
     [DllImport(DLL_NAME)]
@@ -33,27 +41,71 @@ public class PluginTester : MonoBehaviour
     [DllImport(DLL_NAME)]
     private static extern void setFilePath(string filepath);
 
+   //[DllImport(DLL_NAME)]
+   //private static extern void setScore(playerScoreUnity info);
+
     [DllImport(DLL_NAME)]
-    private static extern void setScore(playerScoreUnity info);
+    private static extern void saveCheckPoint(int checkpoint);
+
+    [DllImport(DLL_NAME)]
+    private static extern void loadValues();
 
 
     // Start is called before the first frame update
     void Start()
     {
         filePath = Application.dataPath + "/SaveData/records.txt";
-        test.timeCheckPoint1 = 1;
+
+
+        //test.timeCheckPoint1 = 1;
+    }
+    
+    public void setTheFilePath()
+    {
+        setFilePath(filePath);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void loadTheValues()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            startTimer();
-            setFilePath(filePath);
-            setScore(test);
-            Debug.Log(getInfo(0).timeCheckPoint1);
-            Debug.Log("NoCrash?");
-        }
+        loadValues();
     }
+    
+    public void startTheTimer()
+    {
+        startTimer();
+    }
+
+    public void saveTheCheckpoint(int number)
+    {
+        saveCheckPoint(number);
+    }
+        
+    public float[] callTheInfo(int number)
+    {
+        float[] holder = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
+        holder[0] = getInfo(number).timeCheckPoint1;
+        holder[1] = getInfo(number).timeCheckPoint2;
+        holder[2] = getInfo(number).timeCheckPoint3;
+        holder[4] = getInfo(number).timeCheckPoint4;
+        holder[5] = getInfo(number).timeCheckPoint5;
+        holder[6] = getInfo(number).totalTime;
+        holder[7] = getInfo(number).timesDied;
+        return holder;
+    }
+
+
+
+
+    // Update is called once per frame
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        startTimer();
+    //        setFilePath(filePath);
+    //        setScore(test);
+    //        Debug.Log(getInfo(0).timeCheckPoint1);
+    //        Debug.Log("NoCrash?");
+    //    }
+    //}
 }
