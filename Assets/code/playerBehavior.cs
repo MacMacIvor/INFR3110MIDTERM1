@@ -50,6 +50,11 @@ public class playerBehavior : MonoBehaviour
         currentRespawnLocation = newRespawnPoint;
         currentRespawnLocation.y += 10;
         gameObject.GetComponent<PluginTester>().saveTheCheckpoint(currentCheckPoint);
+        if (currentCheckPoint == 5)
+        {
+            gameObject.GetComponent<PluginTester>().writeTheFile();
+            currentCheckPoint = -1;
+        }
         currentCheckPoint++;
     }
 
@@ -62,4 +67,7 @@ public class playerBehavior : MonoBehaviour
     {
         gameObject.GetComponent<getPlayerRecordInfo>().updateTheInfo();
     }
+
+    
+
 }

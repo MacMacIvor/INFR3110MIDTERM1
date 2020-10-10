@@ -4,13 +4,19 @@ using UnityEngine;
 using Unity.Rendering;
 public class checkPoint : MonoBehaviour
 {
+    bool wasActivated;
     private void Start()
     {
         GetComponent<Renderer>().enabled = false;
+        wasActivated = false;
     }
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<playerBehavior>().updateRespawn(transform.position);
+        if (!wasActivated)
+        {
+            other.GetComponent<playerBehavior>().updateRespawn(transform.position);
+            wasActivated = true;
+        }
     }
 
 

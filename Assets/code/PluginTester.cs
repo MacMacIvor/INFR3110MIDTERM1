@@ -41,8 +41,8 @@ public class PluginTester : MonoBehaviour
     [DllImport(DLL_NAME)]
     private static extern void setFilePath(string filepath);
 
-   //[DllImport(DLL_NAME)]
-   //private static extern void setScore(playerScoreUnity info);
+    [DllImport(DLL_NAME)]
+   private static extern void setScore(playerScoreUnity info);
 
     [DllImport(DLL_NAME)]
     private static extern void saveCheckPoint(int checkpoint);
@@ -50,11 +50,13 @@ public class PluginTester : MonoBehaviour
     [DllImport(DLL_NAME)]
     private static extern void loadValues();
 
+    [DllImport(DLL_NAME)]
+    private static extern void writeToFile();
 
     // Start is called before the first frame update
     void Start()
     {
-        filePath = Application.dataPath + "/SaveData/records.txt";
+        
 
 
         //test.timeCheckPoint1 = 1;
@@ -62,6 +64,7 @@ public class PluginTester : MonoBehaviour
     
     public void setTheFilePath()
     {
+        filePath = Application.dataPath + "/SaveData/records.txt";
         setFilePath(filePath);
     }
 
@@ -82,30 +85,37 @@ public class PluginTester : MonoBehaviour
         
     public float[] callTheInfo(int number)
     {
+        
+
         float[] holder = {0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f };
         holder[0] = getInfo(number).timeCheckPoint1;
         holder[1] = getInfo(number).timeCheckPoint2;
         holder[2] = getInfo(number).timeCheckPoint3;
-        holder[4] = getInfo(number).timeCheckPoint4;
-        holder[5] = getInfo(number).timeCheckPoint5;
-        holder[6] = getInfo(number).totalTime;
-        holder[7] = getInfo(number).timesDied;
+        holder[3] = getInfo(number).timeCheckPoint4;
+        holder[4] = getInfo(number).timeCheckPoint5;
+        holder[5] = getInfo(number).totalTime;
+        holder[6] = getInfo(number).timesDied;
         return holder;
     }
 
 
+    public void writeTheFile()
+    {
+        writeToFile();
+    }
 
 
     // Update is called once per frame
-    //void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        startTimer();
-    //        setFilePath(filePath);
-    //        setScore(test);
-    //        Debug.Log(getInfo(0).timeCheckPoint1);
-    //        Debug.Log("NoCrash?");
-    //    }
-    //}
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            //startTimer();
+            setFilePath(filePath);
+            writeToFile();
+            //setScore(test);
+            Debug.Log(getInfo(0).timeCheckPoint1);
+            Debug.Log("NoCrash?");
+        }
+    }
 }
