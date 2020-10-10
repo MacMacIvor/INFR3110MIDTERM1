@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class playerBehavior : MonoBehaviour
 {
     private int currentCheckPoint = 0;
     private Vector3 currentRespawnLocation = new Vector3(0, 10, 0);
-
+    public Text theText;
+    private const double MAX_PLAYERSCORE = 3000000;
+    private double playerPointsScore = MAX_PLAYERSCORE;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,9 @@ public class playerBehavior : MonoBehaviour
         {
             transform.position += Vector3.right * Time.deltaTime * 7.0f;
         }
+
+        playerPointsScore = MAX_PLAYERSCORE - gameObject.GetComponent<PluginTester>().getTheTime();
+        theText.text = "Score: " + playerPointsScore.ToString();
 
         Physics.gravity = new Vector3(0, Physics.gravity.y, 0);
     }

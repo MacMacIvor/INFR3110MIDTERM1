@@ -53,6 +53,9 @@ public class PluginTester : MonoBehaviour
     [DllImport(DLL_NAME)]
     private static extern void writeToFile();
 
+    [DllImport(DLL_NAME)]
+    private static extern double getTime();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +65,11 @@ public class PluginTester : MonoBehaviour
         //test.timeCheckPoint1 = 1;
     }
     
+    public double getTheTime()
+    {
+        return getTime();
+    }
+
     public void setTheFilePath()
     {
         filePath = Application.dataPath + "/SaveData/records.txt";

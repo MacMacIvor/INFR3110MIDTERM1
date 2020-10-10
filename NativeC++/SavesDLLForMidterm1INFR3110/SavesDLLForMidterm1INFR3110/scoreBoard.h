@@ -19,8 +19,11 @@ public:
 	void saveCheckPoint(int checkpoint);
 	void writeToFile();
 	void loadValues();
+	double getTime();
 private:
-	playerScore playerScores[3];
+	playerScore playerScores1;
+	playerScore playerScores2;
+	playerScore playerScores3;
 	playerScore tempScore;
 	std::chrono::steady_clock::time_point startTime;
 	std::string filePath;

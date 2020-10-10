@@ -19,13 +19,15 @@ extern "C"
 	//
 	//PLUGIN_API void SetPosition(float x, float y);
 	
-	PLUGIN_API playerScore getInfo(int number);
-	PLUGIN_API void setFilePath(std::string filepath);
-	PLUGIN_API void setScore(playerScore info);
+	PLUGIN_API playerScoreUnity getInfo(int number);
+	PLUGIN_API void setFilePath(char* filepath);
+	PLUGIN_API void setScore(playerScoreUnity info);
 	PLUGIN_API void startTimer();
 	PLUGIN_API void saveCheckPoint(int checkpoint);
 	PLUGIN_API void writeToFile();
 	PLUGIN_API void loadValues();
+	PLUGIN_API double getTime();
+
 #ifdef  __cplusplus
 }
 

@@ -14,7 +14,15 @@ struct playerScore {
 	float totalTime;
 	float timesDied;
 };
-
+struct playerScoreUnity {
+	float timeCheckPoint1;
+	float timeCheckPoint2;
+	float timeCheckPoint3;
+	float timeCheckPoint4;
+	float timeCheckPoint5;
+	float totalTime;
+	float timesDied;
+};
 
 
 #endif
